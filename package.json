@@ -1,0 +1,36 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "axios": "^1.1.2",
+        "laravel-echo": "^1.14.2",
+        "laravel-vite-plugin": "^0.6.0",
+        "lodash": "^4.17.21",
+        "postcss": "^8.1.14",
+        "pusher-js": "^7.5.0",
+        "sass": "^1.62.0",
+        "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "@element-plus/icons-vue": "^2.0.10",
+        "@fortawesome/fontawesome-free": "^5.15.1",
+        "@tinymce/tinymce-vue": "^4.0.7",
+        "@vitejs/plugin-vue": "^3.2.0",
+        "@yazan.alnughnugh/file-upload": "^1.0.10",
+        "element-plus": "^2.2.20",
+        "jquery": "^3.6.1",
+        "js-cookie": "^3.0.1",
+        "moment": "^2.29.4",
+        "recursive-iterator": "^3.3.0",
+        "vue": "^3.2.44",
+        "vue-i18n": "^9.2.2",
+        "vue-loader": "^17.0.1",
+        "vue-media-upload": "^2.1.2",
+        "vue-router": "^4.1.6",
+        "vuex": "^4.1.0",
+        "vuex-persistedstate": "^4.1.0"
+    }
+}

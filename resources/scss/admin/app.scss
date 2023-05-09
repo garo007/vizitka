@@ -1,0 +1,33 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Oxygen:wght@300;400&display=swap");
+
+// Configs
+@import "./configs/variables";
+@import "./configs/mixins";
+@import "./configs/reset";
+
+// Simples
+@import "./simples/header";
+@import "./simples/sidebar";
+@import "./simples/preloader";
+@import "./simples/popup";
+@import "./simples/upload";
+
+// Plugins
+@import "./plugins/element-ui";
+@import "./plugins/file-upload";
+
+// Views -> Auth
+@import "views/auth/auth";
+
+// Views -> Screens
+@import "views/screens/clients/index";
+@import "views/screens/clients/roles-permissions";
+
+// Views -> Others
+@import "views/others/not-found";
+
+// Others
+@import "./others/structure";
+@import "./others/helpers";
+@import "./others/custom";

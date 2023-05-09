@@ -1,0 +1,55 @@
+body {
+  font-family: 'Oxygen', sans-serif;
+}
+
+.main {
+  padding-top: 79px;
+
+  .default-section {
+    padding: 30px 25px;
+    min-height: calc(100vh - 79px);
+
+    .default-section {
+      padding: 0;
+    }
+
+    .section-title {
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h1 {
+        color: #323232;
+        font-size: 30px;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .main {
+    .default-section {
+      .section-title {
+        margin-bottom: 15px;
+
+        h1 {
+          font-size: 25px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .main {
+    .default-section {
+      .section-title {
+        h1 {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

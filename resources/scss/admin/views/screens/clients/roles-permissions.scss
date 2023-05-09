@@ -1,0 +1,16 @@
+.roles-permissions-popup {
+    .popup-body {
+        padding-top: 0;
+
+        .roles-permissions-form {
+            display: flex;
+            flex-direction: column;
+            padding: 10px 0;
+            gap: 15px;
+
+            .form-field:nth-child(2) {
+                margin-top: 10px;
+            }
+        }
+    }
+}

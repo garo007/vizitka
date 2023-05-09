@@ -1,0 +1,280 @@
+@function mat-color($palette, $hue: default, $opacity: null) {
+    // If hueKey is a number between zero and one, then it actually contains an
+    // opacity value, so recall this function with the default hue and that given opacity.
+    @if type-of($hue) == number and $hue >= 0 and $hue <= 1 {
+        @return mat-color($palette, default, $hue);
+    }
+
+    $color: map-get($palette, $hue);
+    $opacity: if($opacity == null, opacity($color), $opacity);
+
+    @return rgba($color, $opacity);
+}
+
+$default-pixel: 16;
+@function rem-cal($target-pixel) {
+    @return $target-pixel/$default-pixel + rem;
+}
+
+@mixin aspect-ratio-update($width, $height) {
+    &:before {
+        padding-top: ($height / $width) * 100%;
+    }
+}
+
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    &:before {
+        display: block;
+        content: '';
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@mixin border-radius($radius) {
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+}
+
+@mixin opacity($value) {
+    $IEValue: $value * 100;
+    opacity: $value;
+    -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=' + $IEValue +
+    ')';
+    filter: alpha(opacity=$IEValue);
+}
+
+// Adds shadow to a box
+@mixin box-shadow($arguments...) {
+    -moz-box-shadow: $arguments;
+    -o-box-shadow: $arguments;
+    -webkit-box-shadow: $arguments;
+    box-shadow: $arguments;
+}
+
+// Name of the next breakpoint, or null for the last breakpoint.
+@function breakpoint-next(
+    $name,
+    $breakpoints: $media-break-points,
+    $breakpoint-names: map-keys($breakpoints)
+) {
+    $n: index($breakpoint-names, $name);
+    @return if(
+                    $n != null and $n < length($breakpoint-names),
+                    nth($breakpoint-names, $n + 1),
+                    null
+    );
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+@function breakpoint-min($name, $breakpoints: $media-break-points) {
+    $min: map-get($breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+
+// Maximum breakpoint width. Null for the largest (last) breakpoint.
+@function breakpoint-max($name, $breakpoints: $media-break-points) {
+    //$next: breakpoint-next($name, $breakpoints);
+    //@return if($next, breakpoint-min($next, $breakpoints) - .02, null);
+    $max: map-get($breakpoints, $name);
+    @return if($max != 0, $max, null);
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $media-break-points) {
+    $min: breakpoint-min($name, $breakpoints);
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $media-break-points) {
+    $max: breakpoint-max($name, $breakpoints);
+    @if $max {
+        @media (max-width: $max) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between(
+    $lower,
+    $upper,
+    $breakpoints: $media-break-points
+) {
+    $min: breakpoint-min($lower, $breakpoints);
+    $max: breakpoint-max($upper, $breakpoints);
+
+    @if $min != null and $max != null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $max == null {
+        @include media-breakpoint-up($lower, $breakpoints) {
+            @content;
+        }
+    } @else if $min == null {
+        @include media-breakpoint-down($upper, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin media-breakpoint-only($name, $breakpoints: $media-break-points) {
+    $min: breakpoint-min($name, $breakpoints);
+    $max: breakpoint-max($name, $breakpoints);
+
+    @if $min != null and $max != null {
+        @media (min-width: $min) and (max-width: $max) {
+            @content;
+        }
+    } @else if $max == null {
+        @include media-breakpoint-up($name, $breakpoints) {
+            @content;
+        }
+    } @else if $min == null {
+        @include media-breakpoint-down($name, $breakpoints) {
+            @content;
+        }
+    }
+}
+
+// Extra small devices
+@mixin xs {
+    @media (min-width: #{get-break-point(xs)}) {
+        @content;
+    }
+}
+
+// Small devices
+@mixin sm {
+    @media (min-width: #{get-break-point(sm)}) {
+        @content;
+    }
+}
+
+// Medium devices
+@mixin md {
+    @media (min-width: #{get-break-point(md)}) {
+        @content;
+    }
+}
+//Extra medium devices
+@mixin xm {
+    @media (min-width: #{get-break-point(xm)}) {
+        @content;
+    }
+}
+// Large devices
+@mixin lg {
+    @media (min-width: #{get-break-point(lg)}) {
+        @content;
+    }
+}
+
+// Extra large devices
+@mixin xl {
+    @media (min-width: #{get-break-point(xl)}) {
+        @content;
+    }
+}
+
+// Mobile Device
+@mixin mobile {
+    @include xs() {
+        @content;
+    }
+}
+
+@mixin phone {
+    @include mobile() {
+        @content;
+    }
+}
+
+// Tablet Device
+@mixin tablet {
+    @include sm() {
+        @content;
+    }
+}
+
+// Desktop Device
+@mixin desktop {
+    @include md() {
+        @content;
+    }
+}
+
+// Custom devices
+@mixin rwd($screen) {
+    @media (min-width: $screen + 'px') {
+        @content;
+    }
+}
+
+@function to-number($value) {
+    @if type-of($value) == 'number' {
+        @return $value;
+    } @else if type-of($value) != 'string' {
+        $_: log('Value for `to-number` should be a number or a string.');
+    }
+
+    $result: 0;
+    $digits: 0;
+    $minus: str-slice($value, 1, 1) == '-';
+    $numbers: (
+            '0': 0,
+            '1': 1,
+            '2': 2,
+            '3': 3,
+            '4': 4,
+            '5': 5,
+            '6': 6,
+            '7': 7,
+            '8': 8,
+            '9': 9,
+    );
+
+    @for $i from if($minus, 2, 1) through str-length($value) {
+        $character: str-slice($value, $i, $i);
+
+        @if not(index(map-keys($numbers), $character) or $character == '.') {
+            @return to-length(if($minus, -$result, $result), str-slice($value, $i));
+        }
+
+        @if $character == '.' {
+            $digits: 1;
+        } @else if $digits == 0 {
+            $result: $result * 10 + map-get($numbers, $character);
+        } @else {
+            $digits: $digits * 10;
+            $result: $result + map-get($numbers, $character) / $digits;
+        }
+    }
+
+    @return if($minus, -$result, $result);
+}

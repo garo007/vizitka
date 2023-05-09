@@ -1,0 +1,19 @@
+.contracts-section {
+    .contracts-content {
+        .table-parent {
+            .el-table {
+                .cell {
+                    word-break: normal;
+                }
+
+                .active {
+                    background: #abf8ab;
+                }
+
+                .inactive {
+                    background: #ff9898;
+                }
+            }
+        }
+    }
+}

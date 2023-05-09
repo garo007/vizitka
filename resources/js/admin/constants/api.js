@@ -1,0 +1,1 @@
+export const api_url = import.meta.env.VITE_ADMIN_API_URL;

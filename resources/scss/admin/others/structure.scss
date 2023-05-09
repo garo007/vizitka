@@ -1,0 +1,35 @@
+.web.full-no,
+.web.full-yes {
+  padding-left: 0;
+
+  .sidebar {
+    left: -100%;
+  }
+}
+
+.web.duplex-no,
+.web.duplex-yes {
+  padding-left: 320px;
+
+  .sidebar {
+    left: 0;
+  }
+}
+
+.mobile.full-no,
+.mobile.duplex-no {
+  padding-left: 0;
+
+  .sidebar {
+    left: -100%;
+  }
+}
+
+.mobile.full-yes,
+.mobile.duplex-yes {
+  padding-left: 0;
+
+  .sidebar {
+    left: 0;
+  }
+}

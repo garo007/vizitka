@@ -1,0 +1,152 @@
+.uploader {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px;
+
+  .el-upload {
+    width: 100%;
+
+    .el-upload-dragger {
+      width: 100%;
+      padding: 15px 0;
+      height: max-content;
+      border: 2px dashed #323232;
+      background-color: #F5F5F5;
+
+      .el-icon-upload {
+        color: rgba(50, 50, 50, 0.5);
+        margin-top: 0;
+      }
+
+      .el-upload-placeholder {
+        p {
+          width: 305px;
+          margin: auto;
+          line-height: 20px;
+        }
+      }
+
+      &:hover, &.is-dragover {
+        background-color: #EBEEFD;
+        border-color: $main-color;
+
+        .el-icon-upload {
+          color: $main-color;
+        }
+      }
+    }
+  }
+
+  .el-upload-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .files-area {
+      border: 1px solid #3232323b;
+      border-radius: 10px;
+      padding: 10px;
+
+      p {
+        font-weight: bold;
+        color: #323232;
+        margin-bottom: 10px;
+      }
+
+      .files {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .file {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+          padding-bottom: 10px;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid $main-color;
+            padding-bottom: 10px;
+          }
+
+          &-fields {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+
+            .el-input {
+              &.new-file-input {
+                .el-input-group__prepend {
+                  background: none;
+                  border-right: none;
+                  padding: 0 0 0 8px;
+
+                  div {
+                    width: 62px;
+                    height: 23px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 2px;
+                    border: solid 1px #eccc3e;
+                    background-color: #fbf5d9;
+
+                    span {
+                      font-size: 10px;
+                      font-weight: normal;
+                      font-stretch: normal;
+                      font-style: normal;
+                      line-height: normal;
+                      letter-spacing: normal;
+                      text-align: center;
+                      color: #a78800;
+                    }
+                  }
+                }
+
+                & > input {
+                  border-left: none;
+                }
+
+                .el-input-group__append {
+                  background-color: $main-color;
+                  color: white;
+                }
+              }
+            }
+          }
+
+          &-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            button {
+              height: max-content;
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .uploader {
+    .el-upload-content {
+      .files-area {
+        .files {
+          .file {
+            align-items: center;
+
+            &-fields {
+              flex-direction: column;
+            }
+          }
+        }
+      }
+    }
+  }
+}
